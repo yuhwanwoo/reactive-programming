@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group = 'graphql'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.slf4j:slf4j-api:2.1.0-alpha1'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    implementation 'ch.qos.logback:logback-classic:1.4.14'
+    dependencies {
+        compileOnly 'org.projectlombok:lombok:1.18.32'
+        annotationProcessor 'org.projectlombok:lombok:1.18.32'
+    }
+
+
+}
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.compilerArgs += ['-parameters']
+}
+test {
+    useJUnitPlatform()
+}
