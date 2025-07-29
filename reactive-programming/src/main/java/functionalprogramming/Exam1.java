@@ -13,6 +13,12 @@ callee의 결과에 관심은 있지만 계속 본인의 일을 할 수 있다.
 
 동기지만 non-blocking
 
+동기 : callee의 결과에 관심이 있음? -> 응답을 받아야 함 (대기) callee 읽기 끝날 때까지 함수 리턴 안됨
+비동기 : callee의 결과에 관심이 없음,  요청을 보내고 즉시 제어권을 받음
+
+blocking : 호출한 스레드가 결과를 받을 때까지 CPU를 놀리고 기다림
+nonblocking : 호출한 스레드가 기다리지 않고 즉시 리턴
+
  */
 @Slf4j
 public class Exam1 {
