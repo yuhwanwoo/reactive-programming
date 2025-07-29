@@ -65,3 +65,11 @@ Future와 CompletionStage의 구현체
 * newCachedThreadPool : 사용 가능한 쓰레드가 없다면 새로생성해서 작업을 처리하고, 있다면 재사용. 쓰레드가 일정 시간 사용되지 않으면 회수
 * newScheduledThreadPool : 스케줄링 기능을 갖춘 고정 크기의 쓰레드 풀을 생성. 주기적이거나 지연이 발생하는 작업을 실행
 * newWorkStealingPool : work steal 알고리즘을 사용하는 ForkJoinPool을 생성
+
+### Future: get()
+결과를 구할 떄까지 thread가 계속 block
+future에서 무한 루프나 오랜 시간이 걸린다면 thread가 blocking 상태 유지
+
+### Future: get(long timeout, TimeUnit unit)
+결과를 구할 떄까지 timeout 동안 thread가 block
+timeout이 넘어가도 응답이 반환되지 않으면 TimeoutException 발생
