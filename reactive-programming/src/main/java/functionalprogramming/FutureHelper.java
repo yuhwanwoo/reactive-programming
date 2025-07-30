@@ -28,4 +28,16 @@ public class FutureHelper {
             executor.shutdown();
         }
     }
+
+    public static Future<Integer> getFutureWithException() {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        try {
+            return executor.submit(() -> {
+                Thread.sleep(1000);
+                throw new Exception();
+            });
+        } finally {
+            executor.shutdown();
+        }
+    }
 }

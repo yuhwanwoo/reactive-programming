@@ -21,6 +21,31 @@ public class Exam03 {
 
         assert exception != null;
 
+        Future<Integer> future1 = FutureHelper.getFuture();
+        boolean successToCancel = future1.cancel(true);
+        assert future1.isCancelled();
+        assert future1.isDone();
+        assert successToCancel;
 
+        successToCancel = future1.cancel(true);
+        assert future1.isCancelled();
+        assert future1.isDone();
+        assert !successToCancel;
+
+        Future<Integer> futureWithException = FutureHelper.getFutureWithException();
+
+        Exception exceptionToThrow = null;
+
+        try {
+            futureWithException.get();
+        } catch (ExecutionException e) {
+            exceptionToThrow = e;
+        }
+
+        /*
+         * 예외 발생인지 진짜 완료인지 구분 못함
+         */
+        assert futureWithException.isDone();
+        assert exceptionToThrow != null;
     }
 }
