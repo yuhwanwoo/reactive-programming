@@ -73,3 +73,37 @@ future에서 무한 루프나 오랜 시간이 걸린다면 thread가 blocking �
 ### Future: get(long timeout, TimeUnit unit)
 결과를 구할 떄까지 timeout 동안 thread가 block
 timeout이 넘어가도 응답이 반환되지 않으면 TimeoutException 발생
+
+### CompletionStage 연산자 조합
+50개 가까운 연산자들을 활용하여 비동기 task들을 실행하고 값을 변형하는 등 chaining을 이용한 조합 가능
+에러를 처리하기 위한 콜백 제공
+-> 비동기 non-blocking으로 작동 하려면 별도의 쓰레드가 필요한데
+CompletionStage 자세하게는 CompletableFuture에서는 ForkJoinPool이라는 쓰레드풀을 사용하고 있다 -> newWorkStealingPool
+
+### ForJoinPool - thread pool
+* CompletableFuture는 내부적으로 비동기 함수들을 실행하기 위해 ForkJoinPool을 사용
+* ForkJoinPool의 기본 size=할당된 cpu 코어 -1
+* 데몬 쓰레드. main 쓰레드가 종료되면 즉각적으로 종료
+
+### ForJoinPool - fork & join
+* Task를 fork를 통해서 subtask로 나누고
+* Thread pool에서 steal work 알고리즘을 이용해서 균등하게 처리해서
+* join을 통해서 결과를 생성
+
+
+### CompletionStage 연산자
+* thenAccept [Async]
+Consumer를 파라미터로 받는다
+이전 task로부터 값을 받지만 값을 넘기지 않는다
+다음 task에게 Null이 전달된다
+값을 받아서 action만 수행하는 경우 유용
+
+### thenAccept [Async]의 실행 쓰레드
+done 상태에서 thenAccept는 caller(main)의 쓰레드에서 실행
+done 상태의 completionStage에 thenAccept를 사용하는 경우, caller쓰레드를 block할 수 있다.
+done 상태가 아닌 thenAccept는 callee의 쓰레드에서 실행
+done 상태가 아닌 completionStage에 thenAccept를 사용하는 경우, callee쓰레드를 block할 수 있다.
+
+### then*Async의 쓰레드풀 변경
+모든 then*Async 연산자는 executor를 추가 인자로 받는다.
+이를 통해서 다른 쓰레드풀로 task를 실행할 수 있다.
