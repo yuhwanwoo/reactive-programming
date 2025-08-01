@@ -107,3 +107,27 @@ done 상태가 아닌 completionStage에 thenAccept를 사용하는 경우, call
 ### then*Async의 쓰레드풀 변경
 모든 then*Async 연산자는 executor를 추가 인자로 받는다.
 이를 통해서 다른 쓰레드풀로 task를 실행할 수 있다.
+
+### thenApply [Async]
+Function을 파라미터로 받는다
+이전 task로 부터 T타입의 값을 받아서 가공하고 U타입의 값을 반환한다.
+다음 task에게 반환했던 값이 전달된다
+값을 변형해서 전달해야하는 경우 유용
+
+### thenCompose [Async]
+Function을 파라미터로 받는다
+이전 task로부터 T타입의 값을 받아서 가공하고 U 타입의 CompletionStage를 반환한다
+반환한 CompletionStage가 done상태가 되면 값을 다음 task에 전달한다
+다른 Future를 반환해야하는 경우 유용
+
+### thenRun [Async]
+Runnable을 파라미터로 받는다
+이전 task로부터 값을 받지 않고 값을 반환하지 않는다
+다음 task에게 Null이 전달된다
+future가 완료되었다는 이벤트를 기록할 때 유용
+
+### exceptionally
+Function을 파라미터로 받는다
+이전 task에서 발생한 exception을 받아서 처리하고 값을 반환한다
+다음 task에게 반환된 값을 전달한다
+future 파이프에서 발생한 에러를 처리할 때 유용
