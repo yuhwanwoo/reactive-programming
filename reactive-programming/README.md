@@ -131,3 +131,12 @@ Function을 파라미터로 받는다
 이전 task에서 발생한 exception을 받아서 처리하고 값을 반환한다
 다음 task에게 반환된 값을 전달한다
 future 파이프에서 발생한 에러를 처리할 때 유용
+
+## CompletableFuture의 complete 메소드
+CompletableFuture가 완료되지 않았다면 주어진 값으로 채운다.
+complete에 의해서 상태가 바뀌었다면 true, 아니라면 false를 반환한다.
+
+## CompletableFuture의 allOf 메소드
+여러 CompletableFuture를 모아서 하나의 CompletableFuture로 반환할 수 있다
+모든 CompletableFuture가 완료되면 상태가 done으로 변경
+Void를 반환하므로 각각의 값에 get으로 접근해야 한다.
