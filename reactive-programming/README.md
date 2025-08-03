@@ -140,3 +140,9 @@ complete에 의해서 상태가 바뀌었다면 true, 아니라면 false를 반�
 여러 CompletableFuture를 모아서 하나의 CompletableFuture로 반환할 수 있다
 모든 CompletableFuture가 완료되면 상태가 done으로 변경
 Void를 반환하므로 각각의 값에 get으로 접근해야 한다.
+
+
+## CompletableFuture의 anyOf 메소드
+여러 CompletableFuture를 모악서 하나의 CompletableFuture로 변환할 수 있다
+주어진 future중 하나라도 완료되면 상태가 done으로 변경
+제일먼저 done 상태가 되는 future의 값을 반환
