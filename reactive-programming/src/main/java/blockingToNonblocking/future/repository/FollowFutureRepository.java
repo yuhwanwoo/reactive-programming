@@ -1,4 +1,4 @@
-package blockingToNonblocking.future;
+package blockingToNonblocking.future.repository;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;

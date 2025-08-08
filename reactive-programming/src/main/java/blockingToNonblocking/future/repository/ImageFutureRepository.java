@@ -1,4 +1,4 @@
-package blockingToNonblocking.future;
+package blockingToNonblocking.future.repository;
 
 import blockingToNonblocking.common.repository.ImageEntity;
 import lombok.SneakyThrows;
