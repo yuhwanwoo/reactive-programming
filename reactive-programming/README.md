@@ -146,3 +146,6 @@ Void를 반환하므로 각각의 값에 get으로 접근해야 한다.
 여러 CompletableFuture를 모악서 하나의 CompletableFuture로 변환할 수 있다
 주어진 future중 하나라도 완료되면 상태가 done으로 변경
 제일먼저 done 상태가 되는 future의 값을 반환
+
+# Reactive programming
+비동기 데이터 stream을 사용하는 패러다임
