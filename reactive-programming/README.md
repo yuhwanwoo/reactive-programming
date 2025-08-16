@@ -149,3 +149,27 @@ Void를 반환하므로 각각의 값에 get으로 접근해야 한다.
 
 # Reactive programming
 비동기 데이터 stream을 사용하는 패러다임
+
+# Reactive streams 구현 라이브러리
+### Project reactor
+  Reactive streams 대부분 지원
+Webflux 기반이 되는 라이브러리
+pivotal 에서 개발
+Spring react에서 사용
+Mono와 Flux publisher 제공
+
+* Project reactor - Flux
+0..n개의 item을 전달
+에러가 발생하면 error signal 전달하고 종료
+모든 item을 전달했다면 complete signal 전달하고 종료
+backPressure 지원
+
+### RxJava
+  독립적인편
+reactive extensions -> 자바형태로 porting해서 제공
+
+### Mutiny
+  독립적인편
+레드햇에서 만듬 하이버네이트 리액티브 지원하기 위해 
+
+  
