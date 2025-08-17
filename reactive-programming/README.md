@@ -164,12 +164,34 @@ Mono와 Flux publisher 제공
 모든 item을 전달했다면 complete signal 전달하고 종료
 backPressure 지원
 
+* Project reactor - Mono
+0..1개의 item을 전달
+에러가 발생하면 error signal 전달하고 종료
+모든 item을 전달했다면 complete signal 전달하고 종료
+
+* Mono와 Flux
+Mono<T>:Optional<T>
+없거나 혹은 하나의 값
+Mono<Void>로 특정 사건이 완료되는 시점을 가리킬 수도 있다
+
+Flux<T>: List<T>
+무한하거나 유한한 여러 개의 값
+
+Flux를 Mono로
+-> Mono.from으로 Flux를 Mono로
+-> 첫 번쨰 값만 전달
+
+collectList() -> Flux의 값들을 collect 하고 complete 이벤트가 발생하는 시점에 모은 값들을 전달
+
+Mono를 Flux로
+-> flux() : Mono를 next 한 번 호출하고 onComplete를 호출하는 Flux로 변환
+
 ### RxJava
   독립적인편
 reactive extensions -> 자바형태로 porting해서 제공
 
 ### Mutiny
   독립적인편
-레드햇에서 만듬 하이버네이트 리액티브 지원하기 위해 
+레드햇에서 만듬 하이버네이트 리액티브 지원하기 위해
 
   
