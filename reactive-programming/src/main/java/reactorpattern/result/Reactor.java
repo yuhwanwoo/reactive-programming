@@ -11,6 +11,15 @@ import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/*
+  5. `Reactor.java`:
+       * 리액터 패턴의 핵심 구성 요소입니다.
+       * Selector와 ServerSocketChannel을 초기화하고, 지정된 포트에 바인딩하며 논블로킹 모드로 설정합니다.
+       * Acceptor를 Selector에 OP_ACCEPT 이벤트로 등록합니다.
+       * run() 메서드에서 메인 이벤트 루프를 실행합니다. 이 루프는 Selector가 이벤트를 감지할 때까지 대기하고 (selector.select()), 이벤트가 발생하면 selectedKeys를 순회하며 각 이벤트를 해당 EventHandler로
+         dispatch()합니다.
+       * dispatch(): SelectionKey에 연결된 EventHandler를 가져와 handle() 메서드를 호출합니다.
+ */
 @Slf4j
 public class Reactor implements Runnable {
     private static ExecutorService executorService = Executors.newSingleThreadExecutor();

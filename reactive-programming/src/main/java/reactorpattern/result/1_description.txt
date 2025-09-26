@@ -1,0 +1,11 @@
+리액터 패턴의 전체 흐름:
+
+   1. 초기화: Reactor가 특정 포트로 시작됩니다. Selector와 ServerSocketChannel이 설정되고, Acceptor가 OP_ACCEPT 이벤트를 위해 Selector에 등록됩니다.
+   2. 이벤트 루프: Reactor의 run() 메서드는 Selector가 이벤트를 감지할 때까지 무한 루프를 돌며 대기합니다.
+   3. 연결 수락: 새 클라이언트가 연결을 시도하면 Selector는 OP_ACCEPT 이벤트를 감지하고, Reactor는 이 이벤트를 Acceptor로 전달합니다.
+   4. 클라이언트 핸드셰이크: Acceptor는 새 연결을 수락하고, 해당 클라이언트를 위한 SocketChannel을 생성합니다. 이어서 HttpEventHandler (또는 TcpEventHandler)를 생성하고, OP_READ 이벤트를 위해 Selector에
+      등록합니다.
+   5. 요청 읽기: 클라이언트가 데이터를 전송하면 Selector는 OP_READ 이벤트를 감지하고, Reactor는 이 이벤트를 해당 클라이언트의 HttpEventHandler (또는 TcpEventHandler)로 전달합니다.
+   6. 처리 및 응답: HttpEventHandler는 요청을 읽고 처리한 후 (필요에 따라 ExecutorService를 사용하여 비동기적으로), 클라이언트에 응답을 보냅니다. 응답 전송 후 클라이언트 소켓은 닫힙니다.
+
+  이 아키텍처는 단일 스레드(리액터 스레드)가 논블로킹 I/O를 사용하여 여러 클라이언트 연결을 효율적으로 처리하고, 실제 요청 처리는 워커 스레드 풀에 위임함으로써 높은 확장성을 제공합니다.

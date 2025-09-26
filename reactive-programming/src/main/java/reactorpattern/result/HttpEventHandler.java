@@ -10,6 +10,14 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/*
+   3. `HttpEventHandler.java`:
+       * EventHandler를 구현합니다.
+       * HTTP 요청을 읽고 HTTP 응답을 전송하는 역할을 합니다.
+       * 생성자에서 클라이언트 소켓을 논블로킹 모드로 설정하고, Selector에 OP_READ 이벤트로 등록합니다.
+       * handle() 메서드에서 HTTP 요청을 처리하고 (handleRequest()), MsgCodec를 사용하여 디코딩한 후, 응답을 전송합니다 (sendResponse()).
+       * sendResponse()는 CompletableFuture와 ExecutorService를 사용하여 응답 전송을 비동기적으로 처리하며, 시뮬레이션된 지연(10ms)을 포함합니다.
+ */
 @Slf4j
 public class HttpEventHandler implements EventHandler {
     private final ExecutorService executorService = Executors.newFixedThreadPool(50);
