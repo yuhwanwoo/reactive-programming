@@ -1,4 +1,4 @@
-package com.example.webflux.practice;
+package com.example.webflux.practice.netty;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
