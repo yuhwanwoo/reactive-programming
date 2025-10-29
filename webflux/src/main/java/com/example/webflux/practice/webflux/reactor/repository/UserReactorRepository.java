@@ -1,4 +1,4 @@
-package com.example.webflux.practice.webflux.repository;
+package com.example.webflux.practice.webflux.reactor.repository;
 
 import com.example.webflux.practice.webflux.common.UserEntity;
 import lombok.SneakyThrows;
